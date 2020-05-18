@@ -1,5 +1,5 @@
 # Weblogic on Azure
-This repository shows how to deploy a Java EE application to Azure using WebLogic and Linux virtual machines. The repository hosts the demos for this [talk](abstract.md) or materials for [this](lab-abstract.md) lab. The prerequistes for the lab are [here](prerequisites.md).
+This repository shows how to deploy a Java EE application to Azure using WebLogic and Linux virtual machines. The repository hosts the demos for this [talk](abstract.md) or materials for [this](lab-abstract.md) lab. The prerequistes for the lab are [here](prerequisites.md). The associated slide deck is [here](https://aka.ms/weblogic-on-azure-deck).
 
 The basic Java EE application used throughout is in the [javaee](/javaee) folder. You should set up and explore this application on your local machine.
 
