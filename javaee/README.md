@@ -47,8 +47,8 @@ The next step is to get the application up and running. Follow the steps below t
    * Enter where the Oracle JDK is installed.  Click next. 
    * For the domain directory, hit Create -> Create Domain. 
    * For the domain name, specify 'domain1'. Hit 'Finish' to add the new server to Eclipse.  If Eclipse asks to create a master password hint, do so.  Consider using `<your suffix>` for the questions and answers.
-   * Copy the Postgres driver to where you have WebLogic installed under server/lib. This file is located in the javaee/server directory where you downloaded the application code.
-   * Depending on your platform, find the commExtEnv.sh or commExtEnv.cmd file in the oracle_common/common/bin directory where you have WebLogic installed. You will need to add the Postgres driver to the WebLogic classpath. The end result will look something like the following.  There are several assignments to `WEBLOGIC_CLASSPATH`.  You will likely need to edit the first one.
+   * Copy the PostgreSQL driver to where you have WebLogic installed under server/lib. This file is located in the javaee/server directory where you downloaded the application code.
+   * Depending on your platform, find the commExtEnv.sh or commExtEnv.cmd file in the oracle_common/common/bin directory where you have WebLogic installed. You will need to add the PostgreSQL driver to the WebLogic classpath. The end result will look something like the following.  There are several assignments to `WEBLOGIC_CLASSPATH`.  You will likely need to edit the first one.
 
 #### commExtEnv.sh
 ```
