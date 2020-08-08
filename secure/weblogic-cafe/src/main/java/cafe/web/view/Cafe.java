@@ -38,6 +38,10 @@ public class Cafe implements Serializable {
 	protected Double price;
 	protected List<Coffee> coffeeList;
 
+	public String getCurrentUser() {
+		return FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+	}
+
 	public String getName() {
 		return name;
 	}
