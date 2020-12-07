@@ -6,9 +6,10 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Logger;
-
+import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -61,14 +62,24 @@ public class Cafe implements Serializable {
 	@PostConstruct
 	private void init() {
 		try {
-			InetAddress inetAddress = InetAddress.getByName(
-					((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest())
-							.getServerName());
+			logger.log(Level.SEVERE, "Cafe.init 0");
+			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+			HttpServletRequest request = (HttpServletRequest) context.getRequest();
+			InetAddress inetAddress = InetAddress.getByName(request.getServerName());
+			logger.log(Level.SEVERE, "Cafe.init 1 server name:  {0}", request.getServerName());
+			logger.log(Level.SEVERE, "Cafe.init 1 request scheme {0}", context.getRequestScheme());
+			logger.log(Level.SEVERE, "Cafe.init 1 host name {0}", inetAddress.getHostName());
+			logger.log(Level.SEVERE, "Cafe.init 1 server port {0}", context.getRequestServerPort());
+			logger.log(Level.SEVERE, "Cafe.init 1 context path {0}", request.getContextPath());
+			
+			// for cluster with load balancer
+			// baseUri = context.getRequestScheme() + "://" + inetAddress.getHostName() + ":"
+			// 	+ context.getRequestServerPort() + request.getContextPath() + "/rest/coffees";
 
-			baseUri = FacesContext.getCurrentInstance().getExternalContext().getRequestScheme() + "://"
-					+ inetAddress.getHostName() + ":"
-					+ FacesContext.getCurrentInstance().getExternalContext().getRequestServerPort()
-					+ "/weblogic-cafe/rest/coffees";
+			// For offer without load balancer
+			baseUri = context.getRequestScheme() + "://" + InetAddress.getLocalHost().getHostName() + ":" + context.getRequestServerPort() + request.getContextPath() + "/rest/coffees";
+
+			logger.log(Level.SEVERE, "Cafe.init 1 base uri {0}.", this.baseUri);
 			this.client = ClientBuilder.newClient();
 			this.getAllCoffees();
 		} catch (IllegalArgumentException | NullPointerException | WebApplicationException | UnknownHostException ex) {
